@@ -17,13 +17,15 @@ public class CarDto {
     private String engineType;
     private Integer engineCapacity;
     private Integer productionYear;
+    private Double costPerDay;
 
-    public CarDto(String brand, String model, String colour, String engineType, Integer engineCapacity, Integer productionYear) {
+    public CarDto(String brand, String model, String colour, String engineType, Integer engineCapacity, Integer productionYear, Double costPerDay) {
         this.brand = brand;
         this.model = model;
         this.colour = colour;
         this.engineType = engineType;
         this.engineCapacity = engineCapacity;
         this.productionYear = productionYear;
+        this.costPerDay = costPerDay;
     }
 }

@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -39,4 +41,10 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.password = password;
     }
+
+    @OneToMany(targetEntity = Rental.class,
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
+    private List<Rental> rentals = new ArrayList<>();
 }

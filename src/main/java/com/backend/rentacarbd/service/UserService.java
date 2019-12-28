@@ -1,5 +1,6 @@
 package com.backend.rentacarbd.service;
 
+import com.backend.rentacarbd.controller.exceptions.UserNotFoundException;
 import com.backend.rentacarbd.domain.User;
 import com.backend.rentacarbd.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,9 @@ public class UserService {
 
     public List<User> getUsers(){
        return userRepository.findAll();
+    }
+
+    public User getUserById(Long id) throws UserNotFoundException {
+        return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
 }

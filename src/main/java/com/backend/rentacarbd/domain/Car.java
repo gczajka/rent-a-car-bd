@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -35,12 +37,23 @@ public class Car {
     @NotNull
     private Integer productionYear;
 
-    public Car(String brand, String model, String colour, String engineType, Integer engineCapacity, Integer productionYear) {
+    @NotNull
+    private Double costPerDay;
+
+    public Car(String brand, String model, String colour, String engineType, Integer engineCapacity, Integer productionYear, Double costPerDay) {
         this.brand = brand;
         this.model = model;
         this.colour = colour;
         this.engineType = engineType;
         this.engineCapacity = engineCapacity;
         this.productionYear = productionYear;
+        this.costPerDay = costPerDay;
     }
+
+    @OneToMany(targetEntity = Rental.class,
+            mappedBy = "car",
+            cascade = CascadeType.MERGE,
+            fetch = FetchType.LAZY)
+    private List<Rental> rentals = new ArrayList<>();
+
 }

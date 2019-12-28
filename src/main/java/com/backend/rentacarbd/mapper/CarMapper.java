@@ -16,7 +16,8 @@ public class CarMapper {
                 carDto.getColour(),
                 carDto.getEngineType(),
                 carDto.getEngineCapacity(),
-                carDto.getProductionYear());
+                carDto.getProductionYear(),
+                carDto.getCostPerDay());
     }
 
     public CarDto mapToCarDto(final Car car) {
@@ -27,7 +28,8 @@ public class CarMapper {
                 car.getColour(),
                 car.getEngineType(),
                 car.getEngineCapacity(),
-                car.getProductionYear());
+                car.getProductionYear(),
+                car.getCostPerDay());
     }
 
     public List<CarDto> mapToCarDtoList(final List<Car> carList) {
@@ -39,7 +41,8 @@ public class CarMapper {
                         car.getColour(),
                         car.getEngineType(),
                         car.getEngineCapacity(),
-                        car.getProductionYear()))
+                        car.getProductionYear(),
+                        car.getCostPerDay()))
                 .collect(Collectors.toList());
     }
 }

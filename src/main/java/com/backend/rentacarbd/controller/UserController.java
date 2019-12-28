@@ -1,5 +1,6 @@
 package com.backend.rentacarbd.controller;
 
+import com.backend.rentacarbd.controller.exceptions.UserNotFoundException;
 import com.backend.rentacarbd.domain.UserDto;
 import com.backend.rentacarbd.mapper.UserMapper;
 import com.backend.rentacarbd.service.UserService;
@@ -31,5 +32,10 @@ public class UserController {
     @GetMapping
     public List<UserDto> getUsers() {
         return userMapper.mapToUserDtoList(userService.getUsers());
+    }
+
+    @GetMapping("/{id}")
+    public UserDto getUserById(@PathVariable Long id) throws UserNotFoundException {
+        return userMapper.mapToUserDto(userService.getUserById(id));
     }
 }
