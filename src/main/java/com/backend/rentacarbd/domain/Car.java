@@ -40,7 +40,10 @@ public class Car {
     @NotNull
     private Double costPerDay;
 
-    public Car(String brand, String model, String colour, String engineType, Integer engineCapacity, Integer productionYear, Double costPerDay) {
+    @NotNull
+    private boolean available;
+
+    public Car(String brand, String model, String colour, String engineType, Integer engineCapacity, Integer productionYear, Double costPerDay, boolean available) {
         this.brand = brand;
         this.model = model;
         this.colour = colour;
@@ -48,12 +51,13 @@ public class Car {
         this.engineCapacity = engineCapacity;
         this.productionYear = productionYear;
         this.costPerDay = costPerDay;
+        this.available = available;
     }
 
     @OneToMany(targetEntity = Rental.class,
             mappedBy = "car",
-            cascade = CascadeType.MERGE,
-            fetch = FetchType.LAZY)
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
     private List<Rental> rentals = new ArrayList<>();
 
 }

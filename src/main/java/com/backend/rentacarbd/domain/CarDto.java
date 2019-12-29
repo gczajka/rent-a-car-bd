@@ -18,8 +18,9 @@ public class CarDto {
     private Integer engineCapacity;
     private Integer productionYear;
     private Double costPerDay;
+    private boolean available;
 
-    public CarDto(String brand, String model, String colour, String engineType, Integer engineCapacity, Integer productionYear, Double costPerDay) {
+    public CarDto(String brand, String model, String colour, String engineType, Integer engineCapacity, Integer productionYear, Double costPerDay, boolean available) {
         this.brand = brand;
         this.model = model;
         this.colour = colour;
@@ -27,5 +28,6 @@ public class CarDto {
         this.engineCapacity = engineCapacity;
         this.productionYear = productionYear;
         this.costPerDay = costPerDay;
+        this.available = available;
     }
 }

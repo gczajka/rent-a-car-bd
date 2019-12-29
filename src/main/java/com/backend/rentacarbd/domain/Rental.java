@@ -39,7 +39,7 @@ public class Rental {
     private User user;
 
     @NotNull
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "car_id")
     private Car car;
 
