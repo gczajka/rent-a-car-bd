@@ -24,6 +24,11 @@ public class UserController {
         userService.saveUser(userMapper.mapToUser(userDto));
     }
 
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void modifyUser(@RequestBody UserDto userDto){
+        userService.modifyUser(userMapper.mapToUser(userDto));
+    }
+
     @DeleteMapping
     public void deleteUser(@RequestParam Long userId) {
         userService.deleteUser(userId);

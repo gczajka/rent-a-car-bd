@@ -24,6 +24,11 @@ public class CarController {
         carService.saveCar(carMapper.mapToCar(carDto));
     }
 
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void modifyCar(@RequestBody CarDto carDto){
+        carService.modifyCar(carMapper.mapToCar(carDto));
+    }
+
     @DeleteMapping
     public void deleteCar(@RequestParam Long carId) {
         carService.deleteCar(carId);

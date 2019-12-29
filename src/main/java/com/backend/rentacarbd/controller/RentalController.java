@@ -24,6 +24,10 @@ public class RentalController {
     public void createRental(@PathVariable Long userId, @PathVariable Long carId) throws UserNotFoundException, CarNotFoundException {
         rentalService.createRental(userId, carId);
     }
+    @PutMapping("/{rentalId}")
+    public void modifyRental(@PathVariable Long rentalId) throws RentalNotFoundException {
+        rentalService.lengthenRental(rentalId);
+    }
 
     @DeleteMapping
     public void endRental(@RequestParam Long rentalId) {

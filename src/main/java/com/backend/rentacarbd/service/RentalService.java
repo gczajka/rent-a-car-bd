@@ -34,6 +34,14 @@ public class RentalService {
         return  rentalRepository.save(rental);
     }
 
+    public Rental lengthenRental(final Long rentalId) throws RentalNotFoundException {
+        Rental rental = rentalRepository.findById(rentalId).orElseThrow(RentalNotFoundException::new);
+        rental.setEndDate(rental.getEndDate().plusDays(1));
+        rental.setDuration(rental.getDuration() + 1);
+        rental.setCost(rental.getDuration() * rental.getCar().getCostPerDay());
+        return  rentalRepository.save(rental);
+    }
+
     public void endRental(final Long id){
         Rental rental = rentalRepository.findById(id).get();
         rental.getUser().getRentals().remove(rental);

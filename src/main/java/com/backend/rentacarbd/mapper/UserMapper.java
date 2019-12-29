@@ -10,22 +10,26 @@ import java.util.stream.Collectors;
 @Component
 public class UserMapper {
     public User mapToUser(final UserDto userDto) {
-        return new User(
+        User user = new User(
                 userDto.getName(),
                 userDto.getSurname(),
                 userDto.getEmail(),
                 userDto.getPhoneNumber(),
                 userDto.getPassword());
+        user.setId(userDto.getId());
+        return user;
     }
 
     public UserDto mapToUserDto(final User user) {
-        return new UserDto(
+        UserDto userDto = new UserDto(
                 user.getId(),
                 user.getName(),
                 user.getSurname(),
                 user.getEmail(),
                 user.getPhoneNumber(),
                 user.getPassword());
+        userDto.setId(user.getId());
+        return userDto;
     }
 
     public List<UserDto> mapToUserDtoList(final List<User> userList) {

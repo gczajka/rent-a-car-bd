@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @Component
 public class CarMapper {
     public Car mapToCar(final CarDto carDto) {
-        return new Car(
+        Car car = new Car(
                 carDto.getBrand(),
                 carDto.getModel(),
                 carDto.getColour(),
@@ -19,10 +19,12 @@ public class CarMapper {
                 carDto.getProductionYear(),
                 carDto.getCostPerDay(),
                 carDto.isAvailable());
+        car.setId(carDto.getId());
+        return car;
     }
 
     public CarDto mapToCarDto(final Car car) {
-        return new CarDto(
+        CarDto carDto = new CarDto(
                 car.getId(),
                 car.getBrand(),
                 car.getModel(),
@@ -32,6 +34,8 @@ public class CarMapper {
                 car.getProductionYear(),
                 car.getCostPerDay(),
                 car.isAvailable());
+        carDto.setId(car.getId());
+        return carDto;
     }
 
     public List<CarDto> mapToCarDtoList(final List<Car> carList) {
