@@ -25,4 +25,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     @Override
     void delete(User user);
+
+    boolean existsByPhoneNumber(String phoneNumber);
 }

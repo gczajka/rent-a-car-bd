@@ -43,4 +43,9 @@ public class UserController {
     public UserDto getUserById(@PathVariable Long id) throws UserNotFoundException {
         return userMapper.mapToUserDto(userService.getUserById(id));
     }
+
+    @GetMapping("/alreadyRegistered/{phoneNumber}")
+    public boolean isUserRegistered(@PathVariable String phoneNumber) {
+        return userService.isUserRegistered(phoneNumber);
+    }
 }

@@ -29,12 +29,12 @@ public class User {
     private String email;
 
     @NotNull
-    private Integer phoneNumber;
+    private String phoneNumber;
 
     @NotNull
     private String password;
 
-    public User(String name, String surname, String email, Integer phoneNumber, String password) {
+    public User(String name, String surname, String email, String phoneNumber, String password) {
         this.name = name;
         this.surname = surname;
         this.email = email;

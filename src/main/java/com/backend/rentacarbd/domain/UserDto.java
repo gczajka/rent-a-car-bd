@@ -14,10 +14,10 @@ public class UserDto {
     private String name;
     private String surname;
     private String email;
-    private Integer phoneNumber;
+    private String phoneNumber;
     private String password;
 
-    public UserDto(String name, String surname, String email, Integer phoneNumber, String password) {
+    public UserDto(String name, String surname, String email, String phoneNumber, String password) {
         this.name = name;
         this.surname = surname;
         this.email = email;
