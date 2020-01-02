@@ -38,12 +38,12 @@ public class Car {
     private Integer productionYear;
 
     @NotNull
-    private Double costPerDay;
+    private Integer costPerDay;
 
     @NotNull
     private boolean available;
 
-    public Car(String brand, String model, String colour, String engineType, Integer engineCapacity, Integer productionYear, Double costPerDay, boolean available) {
+    public Car(String brand, String model, String colour, String engineType, Integer engineCapacity, Integer productionYear, Integer costPerDay, boolean available) {
         this.brand = brand;
         this.model = model;
         this.colour = colour;

@@ -31,7 +31,7 @@ public class Rental {
     private long duration;
 
     @NotNull
-    private Double cost;
+    private long cost;
 
     @NotNull
     @ManyToOne
