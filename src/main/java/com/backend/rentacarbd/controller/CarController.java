@@ -29,9 +29,9 @@ public class CarController {
         carService.modifyCar(carMapper.mapToCar(carDto));
     }
 
-    @DeleteMapping
-    public void deleteCar(@RequestParam Long carId) {
-        carService.deleteCar(carId);
+    @DeleteMapping("/{id}")
+    public void deleteCar(@PathVariable Long id) {
+        carService.deleteCar(id);
     }
 
     @GetMapping
