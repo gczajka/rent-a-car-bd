@@ -44,6 +44,11 @@ public class UserController {
         return userMapper.mapToUserDto(userService.getUserById(id));
     }
 
+    @GetMapping("/byEmail/{email}")
+    public UserDto getUserById(@PathVariable String email) throws UserNotFoundException {
+        return userMapper.mapToUserDto(userService.getUserByEmail(email));
+    }
+
     @GetMapping("/alreadyRegistered/{email}")
     public boolean isUserRegistered(@PathVariable String email) {
         return userService.isUserRegistered(email);

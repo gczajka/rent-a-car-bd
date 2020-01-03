@@ -37,6 +37,11 @@ public class UserService {
     public User getUserById(Long id) throws UserNotFoundException {
         return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
+
+    public User getUserByEmail(String email) throws UserNotFoundException {
+        return userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
+    }
+
     public boolean isUserRegistered(final String email) {
         return userRepository.existsByEmail(email);
     }

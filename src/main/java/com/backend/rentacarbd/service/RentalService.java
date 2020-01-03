@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RentalService {
@@ -57,6 +58,12 @@ public class RentalService {
         return rentalRepository.findAll();
     }
 
-    public Rental getRentalById(Long id) throws RentalNotFoundException { return rentalRepository.findById(id).orElseThrow(RentalNotFoundException::new);
+    public List<Rental> getRentalsByUserId(Long userId){
+        List<Rental> allRentals = getRentals();
+        return allRentals.stream()
+                .filter(e -> e.getUser().getId() == userId)
+                .collect(Collectors.toList());
     }
+
+    public Rental getRentalById(Long id) throws RentalNotFoundException { return rentalRepository.findById(id).orElseThrow(RentalNotFoundException::new); }
 }

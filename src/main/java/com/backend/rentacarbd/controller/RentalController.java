@@ -3,8 +3,11 @@ package com.backend.rentacarbd.controller;
 import com.backend.rentacarbd.controller.exceptions.CarNotFoundException;
 import com.backend.rentacarbd.controller.exceptions.RentalNotFoundException;
 import com.backend.rentacarbd.controller.exceptions.UserNotFoundException;
+import com.backend.rentacarbd.domain.Rental;
 import com.backend.rentacarbd.domain.RentalDto;
+import com.backend.rentacarbd.domain.UserDto;
 import com.backend.rentacarbd.mapper.RentalMapper;
+import com.backend.rentacarbd.mapper.UserMapper;
 import com.backend.rentacarbd.service.RentalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +40,11 @@ public class RentalController {
     @GetMapping
     public List<RentalDto> getRentals() {
         return rentalMapper.mapToRentalDtoList(rentalService.getRentals());
+    }
+
+    @GetMapping("/byUserId/{userId}")
+    public List<RentalDto> getRentalsByUserId(@PathVariable Long userId) {
+        return rentalMapper.mapToRentalDtoList(rentalService.getRentalsByUserId(userId));
     }
 
     @GetMapping("/{id}")
