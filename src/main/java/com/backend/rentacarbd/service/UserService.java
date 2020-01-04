@@ -23,8 +23,8 @@ public class UserService {
     }
 
     public User modifyUser(final User user){
-        User oldUser = (userRepository.findById(user.getId())).orElse(new User());
-        Login oldLogin = (loginRepository.findByEmailAndPassword(oldUser.getEmail(), oldUser.getPassword())).orElse(new Login());
+        User oldUser = (userRepository.findById(user.getId())).get();
+        Login oldLogin = (loginRepository.findByEmailAndPassword(oldUser.getEmail(), oldUser.getPassword())).get();
         Login newLogin = new Login(oldLogin.getId(), user.getEmail(), user.getPassword());
         loginRepository.save(newLogin);
         return userRepository.save(user);
@@ -32,7 +32,7 @@ public class UserService {
 
     public void deleteUser(Long id){
         User user = (userRepository.findById(id).orElse(new User()));
-        Login login = (loginRepository.findByEmailAndPassword(user.getEmail(), user.getPassword())).orElse(new Login());
+        Login login = (loginRepository.findByEmailAndPassword(user.getEmail(), user.getPassword())).get();
         userRepository.deleteById(id);
         loginRepository.delete(login);
     }
@@ -51,5 +51,8 @@ public class UserService {
 
     public boolean isUserRegistered(final String email) {
         return userRepository.existsByEmail(email);
+    }
+
+    public boolean doesUserHaveNoRents(final Long id) { return userRepository.findById(id).get().getRentals().isEmpty();
     }
 }

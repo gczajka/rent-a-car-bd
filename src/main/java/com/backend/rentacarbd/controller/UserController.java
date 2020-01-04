@@ -53,4 +53,9 @@ public class UserController {
     public boolean isUserRegistered(@PathVariable String email) {
         return userService.isUserRegistered(email);
     }
+
+    @GetMapping("/hasNoRents/{id}")
+    public boolean doesUserHaveNoRents(@PathVariable Long id) {
+        return userService.doesUserHaveNoRents(id);
+    }
 }

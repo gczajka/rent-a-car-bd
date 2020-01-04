@@ -50,7 +50,8 @@ public class RentalService {
         Car car = rental.getCar();
         car.getRentals().remove(rental);
         car.setAvailable(true);
-//        carRepository.save(car);
+        User user = rental.getUser();
+        user.getRentals().remove(rental);
         rentalRepository.deleteById(id);
     }
 

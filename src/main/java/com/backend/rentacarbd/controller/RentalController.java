@@ -25,14 +25,14 @@ public class RentalController {
     public void createRental(@RequestBody RentalVesselDto vessel) throws UserNotFoundException, CarNotFoundException {
         rentalService.createRental(vessel.getUserId(), vessel.getCarId());
     }
-    @PutMapping("/{rentalId}")
-    public void modifyRental(@PathVariable Long rentalId) throws RentalNotFoundException {
+    @PutMapping
+    public void modifyRental(@RequestBody Long rentalId) throws RentalNotFoundException {
         rentalService.lengthenRental(rentalId);
     }
 
-    @DeleteMapping
-    public void endRental(@RequestParam Long rentalId) {
-        rentalService.endRental(rentalId);
+    @DeleteMapping("/{id}")
+    public void endRental(@PathVariable Long id) {
+        rentalService.endRental(id);
     }
 
     @GetMapping
