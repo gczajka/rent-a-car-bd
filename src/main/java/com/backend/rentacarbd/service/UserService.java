@@ -31,11 +31,10 @@ public class UserService {
     }
 
     public void deleteUser(Long id){
+        User user = (userRepository.findById(id).orElse(new User()));
+        Login login = (loginRepository.findByEmailAndPassword(user.getEmail(), user.getPassword())).orElse(new Login());
         userRepository.deleteById(id);
-    }
-
-    public List<User> getUsers(){
-       return userRepository.findAll();
+        loginRepository.delete(login);
     }
 
     public User getUserById(Long id) throws UserNotFoundException {
@@ -44,6 +43,10 @@ public class UserService {
 
     public User getUserByEmail(String email) throws UserNotFoundException {
         return userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
+    }
+
+    public List<User> getUsers(){
+        return userRepository.findAll();
     }
 
     public boolean isUserRegistered(final String email) {

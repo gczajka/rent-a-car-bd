@@ -29,9 +29,9 @@ public class UserController {
         userService.modifyUser(userMapper.mapToUser(userDto));
     }
 
-    @DeleteMapping
-    public void deleteUser(@RequestParam Long userId) {
-        userService.deleteUser(userId);
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
     }
 
     @GetMapping
