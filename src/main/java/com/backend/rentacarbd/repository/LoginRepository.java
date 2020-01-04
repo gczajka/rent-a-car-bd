@@ -5,6 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Transactional
 @Repository
@@ -13,4 +14,6 @@ public interface LoginRepository extends CrudRepository<Login, Long> {
     Login save(Login login);
 
     boolean existsByEmailAndPassword(String email, String password);
+
+    Optional<Login> findByEmailAndPassword(String email, String password);
 }

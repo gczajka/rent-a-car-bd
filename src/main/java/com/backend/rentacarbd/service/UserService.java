@@ -23,6 +23,10 @@ public class UserService {
     }
 
     public User modifyUser(final User user){
+        User oldUser = (userRepository.findById(user.getId())).orElse(new User());
+        Login oldLogin = (loginRepository.findByEmailAndPassword(oldUser.getEmail(), oldUser.getPassword())).orElse(new Login());
+        Login newLogin = new Login(oldLogin.getId(), user.getEmail(), user.getPassword());
+        loginRepository.save(newLogin);
         return userRepository.save(user);
     }
 

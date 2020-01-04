@@ -26,6 +26,7 @@ public class User {
     private String surname;
 
     @NotNull
+    @Column(unique = true)
     private String email;
 
     @NotNull

@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RentalVessel {
+public class RentalVesselDto {
     Long userId;
-    
+    Long carId;
 }

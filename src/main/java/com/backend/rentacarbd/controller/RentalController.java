@@ -3,11 +3,9 @@ package com.backend.rentacarbd.controller;
 import com.backend.rentacarbd.controller.exceptions.CarNotFoundException;
 import com.backend.rentacarbd.controller.exceptions.RentalNotFoundException;
 import com.backend.rentacarbd.controller.exceptions.UserNotFoundException;
-import com.backend.rentacarbd.domain.Rental;
 import com.backend.rentacarbd.domain.RentalDto;
-import com.backend.rentacarbd.domain.UserDto;
+import com.backend.rentacarbd.domain.RentalVesselDto;
 import com.backend.rentacarbd.mapper.RentalMapper;
-import com.backend.rentacarbd.mapper.UserMapper;
 import com.backend.rentacarbd.service.RentalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +21,9 @@ public class RentalController {
     @Autowired
     private RentalMapper rentalMapper;
 
-    @PostMapping("/{userId}&{carId}")
-    public void createRental(@PathVariable Long userId, @PathVariable Long carId) throws UserNotFoundException, CarNotFoundException {
-        rentalService.createRental(userId, carId);
+    @PostMapping
+    public void createRental(@RequestBody RentalVesselDto vessel) throws UserNotFoundException, CarNotFoundException {
+        rentalService.createRental(vessel.getUserId(), vessel.getCarId());
     }
     @PutMapping("/{rentalId}")
     public void modifyRental(@PathVariable Long rentalId) throws RentalNotFoundException {
