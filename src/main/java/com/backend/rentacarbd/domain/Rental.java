@@ -46,7 +46,7 @@ public class Rental {
 
     public Rental(User user, Car car) {
         this.startDate = LocalDate.now();
-        this.endDate = startDate.plusDays(5);
+        this.endDate = startDate.plusDays(1);
         this.user = user;
         this.car = car;
         this.duration = DAYS.between(startDate, endDate);
