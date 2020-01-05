@@ -9,10 +9,7 @@ import com.backend.rentacarbd.domain.UserDto;
 import com.backend.rentacarbd.mapper.CarMapper;
 import com.backend.rentacarbd.mapper.RentalMapper;
 import com.backend.rentacarbd.mapper.UserMapper;
-import com.backend.rentacarbd.service.CarService;
-import com.backend.rentacarbd.service.LoginService;
-import com.backend.rentacarbd.service.RentalService;
-import com.backend.rentacarbd.service.UserService;
+import com.backend.rentacarbd.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +27,8 @@ public class RequestFacade {
     RentalService rentalService;
     @Autowired
     UserService userService;
+    @Autowired
+    EmailValidatorService emailValidatorService;
     @Autowired
     private CarMapper carMapper;
     @Autowired
@@ -122,4 +121,7 @@ public class RequestFacade {
         return loginService.isLoginRegistered(email, password);
     }
 
+    public boolean isEmailValid(String email) {
+        return emailValidatorService.isEmailValid(email);
+    }
 }
