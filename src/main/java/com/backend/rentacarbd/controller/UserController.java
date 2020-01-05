@@ -2,8 +2,7 @@ package com.backend.rentacarbd.controller;
 
 import com.backend.rentacarbd.controller.exceptions.UserNotFoundException;
 import com.backend.rentacarbd.domain.UserDto;
-import com.backend.rentacarbd.mapper.UserMapper;
-import com.backend.rentacarbd.service.UserService;
+import com.backend.rentacarbd.facade.RequestFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -15,47 +14,45 @@ import java.util.List;
 @RequestMapping(value = "/v1/users")
 public class UserController {
     @Autowired
-    private UserService userService;
-    @Autowired
-    private UserMapper userMapper;
+    private RequestFacade requestFacade;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createUser(@RequestBody UserDto userDto){
-        userService.saveUser(userMapper.mapToUser(userDto));
+        requestFacade.createUser(userDto);
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void modifyUser(@RequestBody UserDto userDto){
-        userService.modifyUser(userMapper.mapToUser(userDto));
+        requestFacade.modifyUser(userDto);
     }
 
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
+         requestFacade.deleteUser(id);
     }
 
     @GetMapping
     public List<UserDto> getUsers() {
-        return userMapper.mapToUserDtoList(userService.getUsers());
+        return requestFacade.getUsers();
     }
 
     @GetMapping("/{id}")
     public UserDto getUserById(@PathVariable Long id) throws UserNotFoundException {
-        return userMapper.mapToUserDto(userService.getUserById(id));
+        return requestFacade.getUserById(id);
     }
 
     @GetMapping("/byEmail/{email}")
     public UserDto getUserById(@PathVariable String email) throws UserNotFoundException {
-        return userMapper.mapToUserDto(userService.getUserByEmail(email));
+        return requestFacade.getUserById(email);
     }
 
     @GetMapping("/alreadyRegistered/{email}")
     public boolean isUserRegistered(@PathVariable String email) {
-        return userService.isUserRegistered(email);
+        return requestFacade.isUserRegistered(email);
     }
 
     @GetMapping("/hasNoRents/{id}")
     public boolean doesUserHaveNoRents(@PathVariable Long id) {
-        return userService.doesUserHaveNoRents(id);
+        return requestFacade.doesUserHaveNoRents(id);
     }
 }

@@ -2,8 +2,7 @@ package com.backend.rentacarbd.controller;
 
 import com.backend.rentacarbd.controller.exceptions.CarNotFoundException;
 import com.backend.rentacarbd.domain.CarDto;
-import com.backend.rentacarbd.mapper.CarMapper;
-import com.backend.rentacarbd.service.CarService;
+import com.backend.rentacarbd.facade.RequestFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -15,32 +14,30 @@ import java.util.List;
 @RequestMapping(value = "/v1/cars")
 public class CarController {
     @Autowired
-    private CarService carService;
-    @Autowired
-    private CarMapper carMapper;
+    private RequestFacade requestFacade;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createCar(@RequestBody CarDto carDto){
-        carService.saveCar(carMapper.mapToCar(carDto));
+        requestFacade.createCar(carDto);
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void modifyCar(@RequestBody CarDto carDto){
-        carService.modifyCar(carMapper.mapToCar(carDto));
+        requestFacade.modifyCar(carDto);
     }
 
     @DeleteMapping("/{id}")
     public void deleteCar(@PathVariable Long id) {
-        carService.deleteCar(id);
+        requestFacade.deleteCar(id);
     }
 
     @GetMapping
     public List<CarDto> getCars() {
-        return carMapper.mapToCarDtoList(carService.getCars());
+        return requestFacade.getCars();
     }
 
     @GetMapping("/{id}")
     public CarDto getCarById(@PathVariable Long id) throws CarNotFoundException {
-        return carMapper.mapToCarDto(carService.getCarById(id));
+        return requestFacade.getCarById(id);
     }
 }
