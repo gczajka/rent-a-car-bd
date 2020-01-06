@@ -37,10 +37,6 @@ public class UserService {
         loginRepository.delete(login);
     }
 
-    public User getUserById(Long id) throws UserNotFoundException {
-        return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-    }
-
     public User getUserByEmail(String email) throws UserNotFoundException {
         return userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
     }

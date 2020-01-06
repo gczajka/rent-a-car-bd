@@ -65,6 +65,4 @@ public class RentalService {
                 .filter(e -> e.getUser().getId() == userId)
                 .collect(Collectors.toList());
     }
-
-    public Rental getRentalById(Long id) throws RentalNotFoundException { return rentalRepository.findById(id).orElseThrow(RentalNotFoundException::new); }
 }

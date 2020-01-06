@@ -36,13 +36,8 @@ public class UserController {
         return requestFacade.getUsers();
     }
 
-    @GetMapping("/{id}")
-    public UserDto getUserById(@PathVariable Long id) throws UserNotFoundException {
-        return requestFacade.getUserById(id);
-    }
-
     @GetMapping("/byEmail/{email}")
-    public UserDto getUserById(@PathVariable String email) throws UserNotFoundException {
+    public UserDto getUserByEmail(@PathVariable String email) throws UserNotFoundException {
         return requestFacade.getUserById(email);
     }
 

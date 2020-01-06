@@ -24,10 +24,7 @@ public class EmailSenderScheduler {
         this.userRepository = userRepository;
     }
 
-//    @Autowired
-//    private AdminConfig adminConfig;
-
-    @Scheduled(cron = "0 * * * * *")
+    @Scheduled(cron = "0 0 21 * * *")
     public void sendInformationEmail() {
         long size = userRepository.count();
         String user = (size == 1) ? " user" : " users";

@@ -52,6 +52,4 @@ public class Rental {
         this.duration = DAYS.between(startDate, endDate);
         this.cost = duration * car.getCostPerDay();
     }
-
-
 }

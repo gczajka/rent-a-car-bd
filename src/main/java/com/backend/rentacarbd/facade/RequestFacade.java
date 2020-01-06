@@ -53,11 +53,6 @@ public class RequestFacade {
         return carMapper.mapToCarDtoList(carService.getCars());
     }
 
-    public CarDto getCarById(Long id) throws CarNotFoundException {
-        return carMapper.mapToCarDto(carService.getCarById(id));
-    }
-
-
 
     public void createRental(Long userId, Long carId) throws UserNotFoundException, CarNotFoundException {
         rentalService.createRental(userId, carId);
@@ -79,10 +74,6 @@ public class RequestFacade {
         return rentalMapper.mapToRentalDtoList(rentalService.getRentalsByUserId(userId));
     }
 
-    public RentalDto getRentalById(Long id) throws RentalNotFoundException {
-        return rentalMapper.mapToRentalDto(rentalService.getRentalById(id));
-    }
-
 
     public void createUser(@RequestBody UserDto userDto){
         userService.saveUser(userMapper.mapToUser(userDto));
@@ -98,10 +89,6 @@ public class RequestFacade {
 
     public List<UserDto> getUsers() {
         return userMapper.mapToUserDtoList(userService.getUsers());
-    }
-
-    public UserDto getUserById(@PathVariable Long id) throws UserNotFoundException {
-        return userMapper.mapToUserDto(userService.getUserById(id));
     }
 
     public UserDto getUserById(@PathVariable String email) throws UserNotFoundException {
@@ -120,6 +107,7 @@ public class RequestFacade {
     public boolean isLoginRegistered(String email, String password) {
         return loginService.isLoginRegistered(email, password);
     }
+
 
     public boolean isEmailValid(String email) {
         return emailValidatorService.isEmailValid(email);

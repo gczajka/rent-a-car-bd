@@ -1,6 +1,5 @@
 package com.backend.rentacarbd.service;
 
-import com.backend.rentacarbd.controller.exceptions.CarNotFoundException;
 import com.backend.rentacarbd.domain.Car;
 import com.backend.rentacarbd.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +26,5 @@ public class CarService {
 
     public List<Car> getCars(){
         return carRepository.findAll();
-    }
-
-    public Car getCarById(Long id) throws CarNotFoundException {
-        return carRepository.findById(id).orElseThrow(CarNotFoundException::new);
     }
 }

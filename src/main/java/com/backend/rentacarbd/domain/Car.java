@@ -59,5 +59,4 @@ public class Car {
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     private List<Rental> rentals = new ArrayList<>();
-
 }

@@ -22,6 +22,7 @@ public class RentalController {
     public void createRental(@RequestBody RentalVesselDto vessel) throws UserNotFoundException, CarNotFoundException {
         requestFacade.createRental(vessel.getUserId(), vessel.getCarId());
     }
+
     @PutMapping
     public void modifyRental(@RequestBody Long rentalId) throws RentalNotFoundException {
         requestFacade.lengthenRental(rentalId);
@@ -40,10 +41,5 @@ public class RentalController {
     @GetMapping("/byUserId/{userId}")
     public List<RentalDto> getRentalsByUserId(@PathVariable Long userId) {
         return requestFacade.getRentalsByUserId(userId);
-    }
-
-    @GetMapping("/{id}")
-    public RentalDto getRentalById(@PathVariable Long id) throws RentalNotFoundException {
-        return requestFacade.getRentalById(id);
     }
 }

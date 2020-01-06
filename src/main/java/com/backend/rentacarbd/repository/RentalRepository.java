@@ -1,7 +1,6 @@
 package com.backend.rentacarbd.repository;
 
 import com.backend.rentacarbd.domain.Rental;
-import com.backend.rentacarbd.domain.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
