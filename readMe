@@ -1,4 +1,4 @@
-### **Rent-a-Car Service**
+Rent-a-Car Service
 
-Backend part of the REST API application. To explore as a **user** register after starting the app. In order to gain **admin** functionalities log in with "admin" as e-mail address and password.
+Backend part of the REST API application. To explore as a user register after starting the app. In order to gain admin functionalities log in with "admin" as e-mail address and password.
 To acquire frontend go to: https://github.com/gczajka/rent-a-car-fd
