@@ -38,7 +38,7 @@ public class UserController {
 
     @GetMapping("/byEmail/{email}")
     public UserDto getUserByEmail(@PathVariable String email) throws UserNotFoundException {
-        return requestFacade.getUserById(email);
+        return requestFacade.getUserByEmail(email);
     }
 
     @GetMapping("/alreadyRegistered/{email}")

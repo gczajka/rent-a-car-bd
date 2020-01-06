@@ -9,17 +9,6 @@ import java.util.stream.Collectors;
 
 @Component
 public class RentalMapper {
-    public RentalDto mapToRentalDto(final Rental rental){
-        return new RentalDto(
-                rental.getId(),
-                rental.getStartDate(),
-                rental.getEndDate(),
-                rental.getDuration(),
-                rental.getCost(),
-                rental.getCar().getModel(),
-                rental.getUser().getSurname());
-    }
-
     public List<RentalDto> mapToRentalDtoList(final List<Rental> rentalList){
         return rentalList.stream()
                 .map(rental -> new RentalDto(

@@ -46,7 +46,6 @@ public class RentalService {
     public void endRental(final Long id){
         Rental rental = rentalRepository.findById(id).get();
         rental.getUser().getRentals().remove(rental);
-
         Car car = rental.getCar();
         car.getRentals().remove(rental);
         car.setAvailable(true);
