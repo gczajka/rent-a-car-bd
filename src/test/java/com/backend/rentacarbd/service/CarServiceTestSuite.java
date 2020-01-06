@@ -1,6 +1,7 @@
 package com.backend.rentacarbd.service;
 
 import com.backend.rentacarbd.domain.Car;
+import com.backend.rentacarbd.domain.CarDto;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,12 +20,12 @@ public class CarServiceTestSuite {
     @Test
     public void testSaveCar() {
         // Given
-        Car car = new Car("brand1", "model1","colour1", "engineType1", 1000, 2000, 5, true);
+        CarDto carDto = new CarDto(null, "brand1", "model1","colour1", "engineType1", 1000, 2000, 5, true);
         Car savedCar = null;
 
         try {
             //When
-            savedCar = carService.saveCar(car);
+            savedCar = carService.saveCar(carDto);
 
             //Then
             Assert.assertEquals("brand1", savedCar.getBrand());
@@ -37,12 +38,12 @@ public class CarServiceTestSuite {
     @Test
     public void getCars() {
         //Given
-        Car car = new Car("brand1", "model1","colour1", "engineType1", 1000, 2000, 5, true);
-        Car savedCar = carService.saveCar(car);
+        CarDto carDto = new CarDto(null, "brand1", "model1","colour1", "engineType1", 1000, 2000, 5, true);
+        Car savedCar = carService.saveCar(carDto);
 
         try {
             //When
-            List<Car> listOfCars = carService.getCars();
+            List<CarDto> listOfCars = carService.getCars();
             //Then
             Assert.assertEquals(1, listOfCars.size());
         } finally {
@@ -54,8 +55,8 @@ public class CarServiceTestSuite {
     @Test
     public void testDeleteCar() {
         // Given
-        Car car = new Car("brand1", "model1","colour1", "engineType1", 1000, 2000, 5, true);
-        Car savedCar = carService.saveCar(car);
+        CarDto carDto = new CarDto(null, "brand1", "model1","colour1", "engineType1", 1000, 2000, 5, true);
+        Car savedCar = carService.saveCar(carDto);
 
         //When
         carService.deleteCar(savedCar.getId());
@@ -68,15 +69,16 @@ public class CarServiceTestSuite {
     @Test
     public void testModifyCar() {
         // Given
-        Car car = new Car("brand1", "model1","colour1", "engineType1", 1000, 2000, 5, true);
-        Car savedCar = carService.saveCar(car);
+        CarDto carDto = new CarDto(null, "brand1", "model1","colour1", "engineType1", 1000, 2000, 5, true);
+        Car savedCar = carService.saveCar(carDto);
         long id = savedCar.getId();
-        savedCar.setBrand("modified");
+        carDto.setBrand("modified");
+        carDto.setId(id);
         Car modifiedCar = null;
 
         try {
             //When
-            modifiedCar = carService.modifyCar(savedCar);
+            modifiedCar = carService.modifyCar(carDto);
 
             //Then
             Assert.assertEquals("modified", modifiedCar.getBrand());

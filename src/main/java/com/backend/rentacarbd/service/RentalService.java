@@ -5,7 +5,9 @@ import com.backend.rentacarbd.controller.exceptions.RentalNotFoundException;
 import com.backend.rentacarbd.controller.exceptions.UserNotFoundException;
 import com.backend.rentacarbd.domain.Car;
 import com.backend.rentacarbd.domain.Rental;
+import com.backend.rentacarbd.domain.RentalDto;
 import com.backend.rentacarbd.domain.User;
+import com.backend.rentacarbd.mapper.RentalMapper;
 import com.backend.rentacarbd.repository.CarRepository;
 import com.backend.rentacarbd.repository.RentalRepository;
 import com.backend.rentacarbd.repository.UserRepository;
@@ -19,6 +21,8 @@ import java.util.stream.Collectors;
 public class RentalService {
     @Autowired
     private RentalRepository rentalRepository;
+    @Autowired
+    private RentalMapper rentalMapper;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -54,14 +58,15 @@ public class RentalService {
         rentalRepository.deleteById(id);
     }
 
-    public List<Rental> getRentals(){
-        return rentalRepository.findAll();
+    public List<RentalDto> getRentals(){
+        return rentalMapper.mapToRentalDtoList(rentalRepository.findAll());
     }
 
-    public List<Rental> getRentalsByUserId(Long userId){
-        List<Rental> allRentals = getRentals();
-        return allRentals.stream()
-                .filter(e -> e.getUser().getId() == userId)
+    public List<RentalDto> getRentalsByUserId(Long userId){
+        List<RentalDto> allRentals = getRentals();
+        allRentals.stream()
+                .filter(e -> e.getUserId() == userId)
                 .collect(Collectors.toList());
+        return allRentals;
     }
 }

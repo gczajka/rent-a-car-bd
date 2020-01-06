@@ -3,9 +3,7 @@ package com.backend.rentacarbd.service;
 import com.backend.rentacarbd.controller.exceptions.CarNotFoundException;
 import com.backend.rentacarbd.controller.exceptions.RentalNotFoundException;
 import com.backend.rentacarbd.controller.exceptions.UserNotFoundException;
-import com.backend.rentacarbd.domain.Car;
-import com.backend.rentacarbd.domain.Rental;
-import com.backend.rentacarbd.domain.User;
+import com.backend.rentacarbd.domain.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,10 +28,10 @@ public class RentalServiceTestSuite {
     @Transactional
     public void testCreateRental() {
         // Given
-        User user = new User("name1", "surname1","email1", "phoneNumber1", "password1");
-        User savedUser = userService.saveUser(user);
-        Car car = new Car("brand1", "model1","colour1", "engineType1", 1000, 2000, 5, true);
-        Car savedCar = carService.saveCar(car);
+        UserDto userDto = new UserDto(1L,"name1", "surname1","email1", "phoneNumber1", "password1");
+        User savedUser = userService.saveUser(userDto);
+        CarDto carDto = new CarDto(null, "brand1", "model1","colour1", "engineType1", 1000, 2000, 5, true);
+        Car savedCar = carService.saveCar(carDto);
         Rental createdRental = null;
         try {
             //When
@@ -58,10 +56,10 @@ public class RentalServiceTestSuite {
     @Transactional
     public void testLengthenRental() {
         // Given
-        User user = new User("name1", "surname1","email1", "phoneNumber1", "password1");
-        User savedUser = userService.saveUser(user);
-        Car car = new Car("brand1", "model1","colour1", "engineType1", 1000, 2000, 5, true);
-        Car savedCar = carService.saveCar(car);
+        UserDto userDto = new UserDto(1L,"name1", "surname1","email1", "phoneNumber1", "password1");
+        User savedUser = userService.saveUser(userDto);
+        CarDto carDto = new CarDto(null, "brand1", "model1","colour1", "engineType1", 1000, 2000, 5, true);
+        Car savedCar = carService.saveCar(carDto);
         Rental createdRental = null;
         Rental lengthenedRental;
         try {
@@ -89,10 +87,10 @@ public class RentalServiceTestSuite {
     @Transactional
     public void testEndRental() {
         // Given
-        User user = new User("name1", "surname1","email1", "phoneNumber1", "password1");
-        User savedUser = userService.saveUser(user);
-        Car car = new Car("brand1", "model1","colour1", "engineType1", 1000, 2000, 5, true);
-        Car savedCar = carService.saveCar(car);
+        UserDto userDto = new UserDto(1L,"name1", "surname1","email1", "phoneNumber1", "password1");
+        User savedUser = userService.saveUser(userDto);
+        CarDto carDto = new CarDto(null, "brand1", "model1","colour1", "engineType1", 1000, 2000, 5, true);
+        Car savedCar = carService.saveCar(carDto);
         Rental createdRental = null;
         try {
             createdRental = rentalService.createRental(savedUser.getId(), savedCar.getId());
@@ -116,10 +114,10 @@ public class RentalServiceTestSuite {
     @Transactional
     public void testGetRentals() {
         // Given
-        User user = new User("name1", "surname1","email1", "phoneNumber1", "password1");
-        User savedUser = userService.saveUser(user);
-        Car car = new Car("brand1", "model1","colour1", "engineType1", 1000, 2000, 5, true);
-        Car savedCar = carService.saveCar(car);
+        UserDto userDto = new UserDto(1L,"name1", "surname1","email1", "phoneNumber1", "password1");
+        User savedUser = userService.saveUser(userDto);
+        CarDto carDto = new CarDto(null, "brand1", "model1","colour1", "engineType1", 1000, 2000, 5, true);
+        Car savedCar = carService.saveCar(carDto);
         Rental createdRental = null;
         try {
             createdRental = rentalService.createRental(savedUser.getId(), savedCar.getId());
@@ -127,7 +125,7 @@ public class RentalServiceTestSuite {
         } catch (CarNotFoundException e) {}
         try {
             //When
-            List<Rental> listOfRentals = rentalService.getRentals();
+            List<RentalDto> listOfRentals = rentalService.getRentals();
 
             //Then
             Assert.assertEquals(1, listOfRentals.size());
@@ -143,10 +141,10 @@ public class RentalServiceTestSuite {
     @Transactional
     public void testGetRentalsByUserId() {
         // Given
-        User user = new User("name1", "surname1","email1", "phoneNumber1", "password1");
-        User savedUser = userService.saveUser(user);
-        Car car = new Car("brand1", "model1","colour1", "engineType1", 1000, 2000, 5, true);
-        Car savedCar = carService.saveCar(car);
+        UserDto userDto = new UserDto(1L,"name1", "surname1","email1", "phoneNumber1", "password1");
+        User savedUser = userService.saveUser(userDto);
+        CarDto carDto = new CarDto(null, "brand1", "model1","colour1", "engineType1", 1000, 2000, 5, true);
+        Car savedCar = carService.saveCar(carDto);
         Rental createdRental = null;
         try {
             createdRental = rentalService.createRental(savedUser.getId(), savedCar.getId());
@@ -154,7 +152,7 @@ public class RentalServiceTestSuite {
         } catch (CarNotFoundException e) {}
         try {
             //When
-            List<Rental> listOfRentals = rentalService.getRentalsByUserId(savedUser.getId());
+            List<RentalDto> listOfRentals = rentalService.getRentalsByUserId(savedUser.getId());
 
             //Then
             Assert.assertEquals(1, listOfRentals.size());

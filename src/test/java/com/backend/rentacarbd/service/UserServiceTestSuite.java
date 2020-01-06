@@ -2,6 +2,7 @@ package com.backend.rentacarbd.service;
 
 import com.backend.rentacarbd.controller.exceptions.UserNotFoundException;
 import com.backend.rentacarbd.domain.User;
+import com.backend.rentacarbd.domain.UserDto;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,11 +21,11 @@ public class UserServiceTestSuite {
     @Test
     public void testSaveUser() {
         // Given
-        User user = new User("name1", "surname1","email1", "phoneNumber1", "password1");
+        UserDto userDto = new UserDto(1L,"name1", "surname1","email1", "phoneNumber1", "password1");
         User savedUser = null;
         try {
             //When
-            savedUser = userService.saveUser(user);
+            savedUser = userService.saveUser(userDto);
 
             //Then
             Assert.assertEquals("name1", savedUser.getName());
@@ -37,11 +38,11 @@ public class UserServiceTestSuite {
     @Test
     public void testGetUsers() {
         //Given
-        User user = new User("name1", "surname1","email1", "phoneNumber1", "password1");
-        User savedUser = userService.saveUser(user);
+        UserDto userDto = new UserDto(1L,"name1", "surname1","email1", "phoneNumber1", "password1");
+        User savedUser = userService.saveUser(userDto);
         try {
             //When
-            List<User> listOfUsers = userService.getUsers();
+            List<UserDto> listOfUsers = userService.getUsers();
 
             //Then
             Assert.assertEquals(1, listOfUsers.size());
@@ -54,8 +55,8 @@ public class UserServiceTestSuite {
     @Test
     public void testDeleteUser() {
         // Given
-        User user = new User("name1", "surname1","email1", "phoneNumber1", "password1");
-        User savedUser = userService.saveUser(user);
+        UserDto userDto = new UserDto(null,"name1", "surname1","email1", "phoneNumber1", "password1");
+        User savedUser = userService.saveUser(userDto);
 
         //When
         userService.deleteUser(savedUser.getId());
@@ -68,14 +69,15 @@ public class UserServiceTestSuite {
     @Test
     public void testModifyUser() {
         // Given
-        User user = new User("name1", "surname1","email1", "phoneNumber1", "password1");
-        User savedUser = userService.saveUser(user);
+        UserDto userDto = new UserDto(null,"name1", "surname1","email1", "phoneNumber1", "password1");
+        User savedUser = userService.saveUser(userDto);
         long id = savedUser.getId();
-        savedUser.setName("modified");
+        userDto.setId(id);
+        userDto.setName("modified");
         User modifiedUser = null;
         try {
             //When
-            modifiedUser = userService.modifyUser(savedUser);
+            modifiedUser = userService.modifyUser(userDto);
 
             //Then
             Assert.assertEquals("modified", modifiedUser.getName());
@@ -89,15 +91,15 @@ public class UserServiceTestSuite {
     @Test
     public void testGetUserByEmail() {
         //Given
-        User user = new User("name1", "surname1","email1", "phoneNumber1", "password1");
-        User savedUser = userService.saveUser(user);
-        User foundUser = null;
+        UserDto userDto = new UserDto(1L,"name1", "surname1","email1", "phoneNumber1", "password1");
+        User savedUser = userService.saveUser(userDto);
+        UserDto foundUser = null;
         try {
             //When
             foundUser = userService.getUserByEmail(savedUser.getEmail());
 
             //Then
-            Assert.assertEquals(user.getName(), foundUser.getName());
+            Assert.assertEquals(userDto.getName(), foundUser.getName());
         } catch (UserNotFoundException e) {
 
         } finally {
@@ -109,8 +111,8 @@ public class UserServiceTestSuite {
     @Test
     public void testIsUserRegistered() {
         //Given
-        User user = new User("name1", "surname1","email1", "phoneNumber1", "password1");
-        User savedUser = userService.saveUser(user);
+        UserDto userDto = new UserDto(null,"name1", "surname1","email1", "phoneNumber1", "password1");
+        User savedUser = userService.saveUser(userDto);
         boolean isRegistered;
         try {
             //When
@@ -127,8 +129,8 @@ public class UserServiceTestSuite {
     @Test
     public void testDoesUserHaveNoRents() {
         //Given
-        User user = new User("name1", "surname1","email1", "phoneNumber1", "password1");
-        User savedUser = userService.saveUser(user);
+        UserDto userDto = new UserDto(1L,"name1", "surname1","email1", "phoneNumber1", "password1");
+        User savedUser = userService.saveUser(userDto);
         boolean hasNoRents;
         try {
             //When

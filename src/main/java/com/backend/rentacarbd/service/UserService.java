@@ -3,6 +3,8 @@ package com.backend.rentacarbd.service;
 import com.backend.rentacarbd.controller.exceptions.UserNotFoundException;
 import com.backend.rentacarbd.domain.Login;
 import com.backend.rentacarbd.domain.User;
+import com.backend.rentacarbd.domain.UserDto;
+import com.backend.rentacarbd.mapper.UserMapper;
 import com.backend.rentacarbd.repository.LoginRepository;
 import com.backend.rentacarbd.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,19 +17,21 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
+    private UserMapper userMapper;
+    @Autowired
     private LoginRepository loginRepository;
 
-    public User saveUser(final User user){
-        loginRepository.save(new Login(user.getEmail(), user.getPassword()));
-        return userRepository.save(user);
+    public User saveUser(final UserDto userdto){
+        loginRepository.save(new Login(userdto.getEmail(), userdto.getPassword()));
+        return userRepository.save(userMapper.mapToUser(userdto));
     }
 
-    public User modifyUser(final User user){
-        User oldUser = (userRepository.findById(user.getId())).get();
+    public User modifyUser(final UserDto userDto){
+        User oldUser = (userRepository.findById(userDto.getId())).get();
         Login oldLogin = (loginRepository.findByEmailAndPassword(oldUser.getEmail(), oldUser.getPassword())).get();
-        Login newLogin = new Login(oldLogin.getId(), user.getEmail(), user.getPassword());
+        Login newLogin = new Login(oldLogin.getId(), userDto.getEmail(), userDto.getPassword());
         loginRepository.save(newLogin);
-        return userRepository.save(user);
+        return userRepository.save(userMapper.mapToUser(userDto));
     }
 
     public void deleteUser(Long id){
@@ -37,12 +41,12 @@ public class UserService {
         loginRepository.delete(login);
     }
 
-    public User getUserByEmail(String email) throws UserNotFoundException {
-        return userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
+    public UserDto getUserByEmail(String email) throws UserNotFoundException {
+        return userMapper.mapToUserDto(userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new));
     }
 
-    public List<User> getUsers(){
-        return userRepository.findAll();
+    public List<UserDto> getUsers(){
+        return userMapper.mapToUserDtoList(userRepository.findAll());
     }
 
     public boolean isUserRegistered(final String email) {

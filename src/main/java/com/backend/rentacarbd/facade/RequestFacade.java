@@ -4,14 +4,9 @@ import com.backend.rentacarbd.controller.exceptions.CarNotFoundException;
 import com.backend.rentacarbd.controller.exceptions.RentalNotFoundException;
 import com.backend.rentacarbd.controller.exceptions.UserNotFoundException;
 import com.backend.rentacarbd.domain.*;
-import com.backend.rentacarbd.mapper.CarMapper;
-import com.backend.rentacarbd.mapper.RentalMapper;
-import com.backend.rentacarbd.mapper.UserMapper;
 import com.backend.rentacarbd.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -27,20 +22,13 @@ public class RequestFacade {
     UserService userService;
     @Autowired
     EmailValidatorService emailValidatorService;
-    @Autowired
-    private CarMapper carMapper;
-    @Autowired
-    private RentalMapper rentalMapper;
-    @Autowired
-    private UserMapper userMapper;
-
 
     public Car createCar(CarDto carDto) {
-        return carService.saveCar(carMapper.mapToCar(carDto));
+        return carService.saveCar(carDto);
     }
 
     public Car modifyCar(CarDto carDto){
-        return carService.modifyCar(carMapper.mapToCar(carDto));
+        return carService.modifyCar(carDto);
     }
 
     public void deleteCar(Long id) {
@@ -48,7 +36,7 @@ public class RequestFacade {
     }
 
     public List<CarDto> getCars() {
-        return carMapper.mapToCarDtoList(carService.getCars());
+        return carService.getCars();
     }
 
 
@@ -65,20 +53,20 @@ public class RequestFacade {
     }
 
     public List<RentalDto> getRentals() {
-        return rentalMapper.mapToRentalDtoList(rentalService.getRentals());
+        return (rentalService.getRentals());
     }
 
     public List<RentalDto> getRentalsByUserId(Long userId) {
-        return rentalMapper.mapToRentalDtoList(rentalService.getRentalsByUserId(userId));
+        return rentalService.getRentalsByUserId(userId);
     }
 
 
     public User createUser(UserDto userDto){
-        return userService.saveUser(userMapper.mapToUser(userDto));
+        return userService.saveUser(userDto);
     }
 
     public User modifyUser(UserDto userDto){
-        return userService.modifyUser(userMapper.mapToUser(userDto));
+        return userService.modifyUser(userDto);
     }
 
     public void deleteUser(Long id) {
@@ -86,11 +74,11 @@ public class RequestFacade {
     }
 
     public List<UserDto> getUsers() {
-        return userMapper.mapToUserDtoList(userService.getUsers());
+        return userService.getUsers();
     }
 
     public UserDto getUserByEmail(String email) throws UserNotFoundException {
-        return userMapper.mapToUserDto(userService.getUserByEmail(email));
+        return userService.getUserByEmail(email);
     }
 
     public boolean isUserRegistered(String email) {
